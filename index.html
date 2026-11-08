@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ventas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>📦 Calculadora de Ventas</h1>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+            </div>
+            <p class="subtitle">Calcula tus ganancias por producto</p>
+        </header>
+
+        <div class="products-grid">
+            <!-- Recarga Individual -->
+            <div class="product-card" data-product="recarga">
+                <div class="product-header">
+                    <span class="product-icon">🔋</span>
+                    <div>
+                        <h2>Recarga Individual</h2>
+                        <span class="product-tag tag-small">Unidad</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="label">Costo base:</span>
+                        <span class="value cost">$2.50</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Precio de venta:</span>
+                        <span class="value sale">$10.00</span>
+                    </div>
+                    <div class="info-row profit-row">
+                        <span class="label">Ganancia por unidad:</span>
+                        <span class="value profit">$7.50</span>
+                    </div>
+                </div>
+                <div class="product-input">
+                    <label for="qty-recarga">Cantidad vendida:</label>
+                    <div class="input-group">
+                        <button class="btn-minus" onclick="adjustQty('recarga', -1)">−</button>
+                        <input type="number" id="qty-recarga" min="0" value="0" oninput="calculateAll()">
+                        <button class="btn-plus" onclick="adjustQty('recarga', 1)">+</button>
+                    </div>
+                </div>
+                <div class="product-result">
+                    <div class="result-row">
+                        <span>Total venta:</span>
+                        <span id="total-venta-recarga">$0.00</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Total costo:</span>
+                        <span id="total-costo-recarga">$0.00</span>
+                    </div>
+                    <div class="result-row result-profit">
+                        <span>Ganancia:</span>
+                        <span id="ganancia-recarga">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuarto de Caja -->
+            <div class="product-card" data-product="cuarto">
+                <div class="product-header">
+                    <span class="product-icon">📦</span>
+                    <div>
+                        <h2>Cuarto de Caja</h2>
+                        <span class="product-tag tag-medium">1/4 Caja</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="label">Costo base:</span>
+                        <span class="value cost">$12.50</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Precio de venta:</span>
+                        <span class="value sale">$40.00</span>
+                    </div>
+                    <div class="info-row profit-row">
+                        <span class="label">Ganancia por unidad:</span>
+                        <span class="value profit">$27.50</span>
+                    </div>
+                </div>
+                <div class="product-input">
+                    <label for="qty-cuarto">Cantidad vendida:</label>
+                    <div class="input-group">
+                        <button class="btn-minus" onclick="adjustQty('cuarto', -1)">−</button>
+                        <input type="number" id="qty-cuarto" min="0" value="0" oninput="calculateAll()">
+                        <button class="btn-plus" onclick="adjustQty('cuarto', 1)">+</button>
+                    </div>
+                </div>
+                <div class="product-result">
+                    <div class="result-row">
+                        <span>Total venta:</span>
+                        <span id="total-venta-cuarto">$0.00</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Total costo:</span>
+                        <span id="total-costo-cuarto">$0.00</span>
+                    </div>
+                    <div class="result-row result-profit">
+                        <span>Ganancia:</span>
+                        <span id="ganancia-cuarto">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Caja -->
+            <div class="product-card" data-product="media">
+                <div class="product-header">
+                    <span class="product-icon">📦</span>
+                    <div>
+                        <h2>Media Caja</h2>
+                        <span class="product-tag tag-large">1/2 Caja</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="label">Costo base:</span>
+                        <span class="value cost">$25.00</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Precio de venta:</span>
+                        <span class="value sale">$90.00</span>
+                    </div>
+                    <div class="info-row profit-row">
+                        <span class="label">Ganancia por unidad:</span>
+                        <span class="value profit">$65.00</span>
+                    </div>
+                </div>
+                <div class="product-input">
+                    <label for="qty-media">Cantidad vendida:</label>
+                    <div class="input-group">
+                        <button class="btn-minus" onclick="adjustQty('media', -1)">−</button>
+                        <input type="number" id="qty-media" min="0" value="0" oninput="calculateAll()">
+                        <button class="btn-plus" onclick="adjustQty('media', 1)">+</button>
+                    </div>
+                </div>
+                <div class="product-result">
+                    <div class="result-row">
+                        <span>Total venta:</span>
+                        <span id="total-venta-media">$0.00</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Total costo:</span>
+                        <span id="total-costo-media">$0.00</span>
+                    </div>
+                    <div class="result-row result-profit">
+                        <span>Ganancia:</span>
+                        <span id="ganancia-media">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caja Completa -->
+            <div class="product-card" data-product="caja">
+                <div class="product-header">
+                    <span class="product-icon">📦</span>
+                    <div>
+                        <h2>Caja Completa</h2>
+                        <span class="product-tag tag-full">Caja Full</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="label">Costo base:</span>
+                        <span class="value cost">$50.00</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Precio de venta:</span>
+                        <span class="value sale">$150.00</span>
+                    </div>
+                    <div class="info-row profit-row">
+                        <span class="label">Ganancia por unidad:</span>
+                        <span class="value profit">$100.00</span>
+                    </div>
+                </div>
+                <div class="product-input">
+                    <label for="qty-caja">Cantidad vendida:</label>
+                    <div class="input-group">
+                        <button class="btn-minus" onclick="adjustQty('caja', -1)">−</button>
+                        <input type="number" id="qty-caja" min="0" value="0" oninput="calculateAll()">
+                        <button class="btn-plus" onclick="adjustQty('caja', 1)">+</button>
+                    </div>
+                </div>
+                <div class="product-result">
+                    <div class="result-row">
+                        <span>Total venta:</span>
+                        <span id="total-venta-caja">$0.00</span>
+                    </div>
+                    <div class="result-row">
+                        <span>Total costo:</span>
+                        <span id="total-costo-caja">$0.00</span>
+                    </div>
+                    <div class="result-row result-profit">
+                        <span>Ganancia:</span>
+                        <span id="ganancia-caja">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen General -->
+        <div class="summary-card">
+            <h2>📊 Resumen General</h2>
+
+            <!-- Fila superior: unidades y ventas brutas -->
+            <div class="summary-section">
+                <div class="summary-grid summary-grid-3">
+                    <div class="summary-item">
+                        <span class="summary-label">Total Unidades</span>
+                        <span class="summary-value" id="total-unidades">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Ventas</span>
+                        <span class="summary-value sale-color" id="total-ventas">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Costos</span>
+                        <span class="summary-value cost-color" id="total-costos">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ganancia bruta -->
+            <div class="summary-section">
+                <div class="section-title">Ganancia Bruta</div>
+                <div class="summary-grid summary-grid-1">
+                    <div class="summary-item item-bruta">
+                        <span class="summary-label">Ganancia antes de deducciones</span>
+                        <span class="summary-value profit-color" id="ganancia-bruta">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deducciones -->
+            <div class="summary-section">
+                <div class="section-title">Deducciones</div>
+                <div class="summary-grid summary-grid-2">
+                    <div class="summary-item item-deduccion item-trabajadores">
+                        <div class="deduccion-header">
+                            <span class="deduccion-icon">👷</span>
+                            <span class="summary-label">Trabajadores (30%)</span>
+                        </div>
+                        <span class="summary-value deduccion-color" id="deduccion-trabajadores">−$0.00</span>
+                    </div>
+                    <div class="summary-item item-deduccion item-mantenimiento">
+                        <div class="deduccion-header">
+                            <span class="deduccion-icon">🔧</span>
+                            <span class="summary-label">Mantenimiento (10%)</span>
+                        </div>
+                        <span class="summary-value deduccion-color" id="deduccion-mantenimiento">−$0.00</span>
+                    </div>
+                </div>
+                <div class="deduccion-barra-container">
+                    <div class="deduccion-barra">
+                        <div class="barra-trabajadores" id="barra-trabajadores" style="width: 0%"></div>
+                        <div class="barra-mantenimiento" id="barra-mantenimiento" style="width: 0%"></div>
+                        <div class="barra-neta" id="barra-neta" style="width: 0%"></div>
+                    </div>
+                    <div class="barra-legend">
+                        <span class="legend-item"><span class="legend-dot dot-trabajadores"></span> Trabajadores 30%</span>
+                        <span class="legend-item"><span class="legend-dot dot-mantenimiento"></span> Mantenimiento 10%</span>
+                        <span class="legend-item"><span class="legend-dot dot-neta"></span> Tu ganancia 60%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ganancia Neta Final -->
+            <div class="summary-section">
+                <div class="summary-grid summary-grid-1">
+                    <div class="summary-item highlight">
+                        <span class="summary-label">💰 Ganancia Neta Final (después del 40% de deducciones)</span>
+                        <span class="summary-value profit-color final-value" id="ganancia-total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-reset" onclick="resetAll()">🔄 Reiniciar Todo</button>
+        </div>
+
+        <footer>
+            <p>Calculadora de Ventas &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
